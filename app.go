@@ -25,3 +25,8 @@ func (a *App) startup(ctx context.Context) {
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
+
+// transform distance units to km and store them
+func (a *App) SaveRun(day string, distance float32, distanceUnit string, time, timeVO2, avgBPM float32) {
+	fmt.Println(day, distance, distanceUnit, time, timeVO2, avgBPM)
+}

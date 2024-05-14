@@ -1,17 +1,31 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import styles from './App.module.css';
+
+import { Greet, SaveRun } from "../wailsjs/go/main/App"
 
 export default function App() {
 
-    const [day, setDay] = useState<string>()
-    const [distance, setDistance] = useState<number>()
+    const [day, setDay] = useState<string>("")
+    const [distance, setDistance] = useState<number>(0)
     const [distanceUnit, setDistanceUnit] = useState("Km")
-    const [time, setTime] = useState<number>()
-    const [timeVO2, setTimeVO2] = useState<number>()
-    const [avgBPM, setAvgBPM] = useState<number>()
+    const [time, setTime] = useState<number>(0)
+    const [timeVO2, setTimeVO2] = useState<number>(0)
+    const [avgBPM, setAvgBPM] = useState<number>(0)
 
-    function handleSubmit(e: FormEvent) {
+    function resetForm() {
+        setDay("")
+        setDistance(0)
+        setDistanceUnit("Km")
+        setTime(0)
+        setTimeVO2(0)
+        setAvgBPM(0)
+    }
+
+    async function handleSubmit(e: any) {
         e.preventDefault()
+        e.target.reset()
+        await SaveRun(day, distance, distanceUnit, time, timeVO2, avgBPM)
+        resetForm()
     }
 
     return (
@@ -28,7 +42,7 @@ export default function App() {
                         <fieldset>
                             <label htmlFor="distance">Distance ran</label>
                             <input type="number" id='distance' name='distance'
-                                value={distance} onChange={(v) => setDistance(+v.currentTarget.value)} />
+                                value={distance == 0 ? "" : distance} onChange={(v) => setDistance(+v.currentTarget.value)} />
                         </fieldset>
                         <fieldset>
                             <label htmlFor="distance_unit">Distance unit</label>
@@ -43,18 +57,19 @@ export default function App() {
                     <fieldset>
                         <label htmlFor="time">Time (minutes)</label>
                         <input type="number" id='time' name='time'
-                            value={time} onChange={(v) => setTime(+v.currentTarget.value)} />
+                            value={time == 0 ? "" : time} onChange={(v) => setTime(+v.currentTarget.value)} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="time_vo2">Time in VO2 max (minutes)</label>
                         <input type="number" id='time_vo2' name='time_vo2'
-                            value={timeVO2} onChange={(v) => setTimeVO2(+v.currentTarget.value)} />
+                            value={timeVO2 == 0 ? "" : timeVO2} onChange={(v) => setTimeVO2(+v.currentTarget.value)} />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="avg_bpm">Average heart beat (bpm)</label>
                         <input type="number" id='avg_bpm' name='avg_bpm'
-                            value={avgBPM} onChange={(v) => setAvgBPM(+v.currentTarget.value)} />
+                            value={avgBPM == 0 ? "" : avgBPM} onChange={(v) => setAvgBPM(+v.currentTarget.value)} />
                     </fieldset>
+                    <button type='submit' className={styles.submit_button}>Submit!</button>
                 </form>
             </section>
             <section>
