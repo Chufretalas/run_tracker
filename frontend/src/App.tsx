@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './App.module.css';
 
-import { Greet, SaveRun } from "../wailsjs/go/main/App"
+import { PrintAllRuns, SaveRun } from "../wailsjs/go/main/App"
 
 export default function App() {
 
@@ -25,13 +25,14 @@ export default function App() {
         e.preventDefault()
         e.target.reset()
         await SaveRun(day, distance, distanceUnit, time, timeVO2, avgBPM)
+        await PrintAllRuns()
         resetForm()
     }
 
     return (
         <main className={styles.main}>
             <section>
-                <h1 className={styles.section_title}>Register a new run</h1>
+                <h1 className={styles.section_title} onClick={() => PrintAllRuns()}>Register a new run</h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <fieldset>
                         <label htmlFor="day">Day of the run</label>
@@ -50,7 +51,7 @@ export default function App() {
                                 value={distanceUnit} onChange={(v) => setDistanceUnit(v.currentTarget.value)}>
                                 <option value="Km">Km</option>
                                 <option value="miles">miles</option>
-                                <option value="miles">m</option>
+                                <option value="m">m</option>
                             </select>
                         </fieldset>
                     </div>
