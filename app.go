@@ -38,7 +38,6 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-// TODO: transform distance units to km and store them
 func (a *App) SaveRun(r Run) {
 	a.Runs = append(a.Runs, r)
 	data, err := json.MarshalIndent(a.Runs, "", "\t")
@@ -48,6 +47,16 @@ func (a *App) SaveRun(r Run) {
 	os.WriteFile("./data.json", data, 0644)
 }
 
+func (a *App) GetAllRuns() []Run {
+	data, err := os.ReadFile("./data.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	json.Unmarshal(data, &a.Runs)
+	return a.Runs
+}
+
 func (a *App) PrintAllRuns() {
-	fmt.Println(a.Runs)
+	fmt.Println(a.GetAllRuns())
 }

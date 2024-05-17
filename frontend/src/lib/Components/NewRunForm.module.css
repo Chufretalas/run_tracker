@@ -1,0 +1,49 @@
+.form fieldset {
+    margin: 15px 10px;
+}
+
+.form label {
+    margin-bottom: 3px;
+    font-size: 1.3rem;
+}
+
+.form input, .form select, .form option {
+    background-color: black;
+    color: white;
+    border: 1px solid #ff4912;
+    box-shadow: 3px 3px #ff4912;
+    border-radius: 5px;
+    height: 2rem;
+    font-size: 1.2rem;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.submit_button {
+    color: white;
+    background-color: #ff4912;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    filter: drop-shadow(2px 2px 0 white);
+    transition: all 250ms;
+}
+
+.submit_button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #ff4912;
+    filter: drop-shadow(2px 2px 0 #ff4912);
+    font-weight: bolder;
+}
