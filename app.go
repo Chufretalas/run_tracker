@@ -9,12 +9,11 @@ import (
 )
 
 type Run struct {
-	Day          string  `json:"day"`
-	Distance     float32 `json:"distance"`
-	DistanceUnit string  `json:"distance_unit"`
-	Time         float32 `json:"time"`
-	TimeVO2      float32 `json:"time_vo2"`
-	AvgBPM       float32 `json:"avg_bpm"`
+	Day      string  `json:"day"`
+	Distance float32 `json:"distance"`
+	Time     float32 `json:"time"`
+	TimeVO2  float32 `json:"time_vo2"`
+	AvgBPM   float32 `json:"avg_bpm"`
 }
 
 // App struct
@@ -40,8 +39,8 @@ func (a *App) Greet(name string) string {
 }
 
 // TODO: transform distance units to km and store them
-func (a *App) SaveRun(day string, distance float32, distanceUnit string, time, timeVO2, avgBPM float32) {
-	a.Runs = append(a.Runs, Run{day, distance, distanceUnit, time, timeVO2, avgBPM})
+func (a *App) SaveRun(r Run) {
+	a.Runs = append(a.Runs, r)
 	data, err := json.MarshalIndent(a.Runs, "", "\t")
 	if err != nil {
 		log.Fatal(err)

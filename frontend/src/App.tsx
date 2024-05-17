@@ -2,12 +2,15 @@ import { useState } from 'react';
 import styles from './App.module.css';
 
 import { PrintAllRuns, SaveRun } from "../wailsjs/go/main/App"
+import { main } from "../wailsjs/go/models"
+import convertDistance from './lib/utils/convert_distance';
+import DistUnit from './lib/types/distance_units';
 
 export default function App() {
 
     const [day, setDay] = useState<string>("")
     const [distance, setDistance] = useState<number>(0)
-    const [distanceUnit, setDistanceUnit] = useState("Km")
+    const [distanceUnit, setDistanceUnit] = useState<DistUnit>(DistUnit.Km)
     const [time, setTime] = useState<number>(0)
     const [timeVO2, setTimeVO2] = useState<number>(0)
     const [avgBPM, setAvgBPM] = useState<number>(0)
@@ -15,7 +18,7 @@ export default function App() {
     function resetForm() {
         setDay("")
         setDistance(0)
-        setDistanceUnit("Km")
+        setDistanceUnit(DistUnit.Km)
         setTime(0)
         setTimeVO2(0)
         setAvgBPM(0)
@@ -24,7 +27,14 @@ export default function App() {
     async function handleSubmit(e: any) {
         e.preventDefault()
         e.target.reset()
-        await SaveRun(day, distance, distanceUnit, time, timeVO2, avgBPM)
+        const run = new main.Run()
+        run.day = day
+        run.distance = convertDistance(distance, distanceUnit, DistUnit.Km)
+        run.time = time
+        run.time_vo2 = timeVO2
+        run.avg_bpm = avgBPM
+
+        await SaveRun(run)
         await PrintAllRuns()
         resetForm()
     }
@@ -48,10 +58,10 @@ export default function App() {
                         <fieldset>
                             <label htmlFor="distance_unit">Distance unit</label>
                             <select id="distance_unit" name="distance_unit"
-                                value={distanceUnit} onChange={(v) => setDistanceUnit(v.currentTarget.value)}>
-                                <option value="Km">Km</option>
-                                <option value="miles">miles</option>
-                                <option value="m">m</option>
+                                value={distanceUnit} onChange={(v) => setDistanceUnit(v.currentTarget.value as DistUnit)}>
+                                <option value={DistUnit.Km}>Km</option>
+                                <option value={DistUnit.miles}>miles</option>
+                                <option value={DistUnit.m}>m</option>
                             </select>
                         </fieldset>
                     </div>

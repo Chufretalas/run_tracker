@@ -10,6 +10,6 @@ export function PrintAllRuns() {
   return window['go']['main']['App']['PrintAllRuns']();
 }
 
-export function SaveRun(arg1, arg2, arg3, arg4, arg5, arg6) {
-  return window['go']['main']['App']['SaveRun'](arg1, arg2, arg3, arg4, arg5, arg6);
+export function SaveRun(arg1) {
+  return window['go']['main']['App']['SaveRun'](arg1);
 }
