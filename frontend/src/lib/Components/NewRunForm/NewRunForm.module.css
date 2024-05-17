@@ -10,8 +10,8 @@
 .form input, .form select, .form option {
     background-color: black;
     color: white;
-    border: 1px solid #ff4912;
-    box-shadow: 3px 3px #ff4912;
+    border: 2px solid #ff4912;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.678);
     border-radius: 5px;
     height: 2rem;
     font-size: 1.2rem;

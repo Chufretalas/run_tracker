@@ -12,7 +12,7 @@ export default function calcVelocity(distance: number, distanceUnit: DistUnit, t
             return convertDistance(distance, distanceUnit, DistUnit.m) / (time * 60)
 
         default:
-            console.error("something went wrong while converting a velocity", distance, distanceUnit, time, velocityUnit)
+            console.error("something went wrong while calculating a velocity", distance, distanceUnit, time, velocityUnit)
             return 0
     }
 }

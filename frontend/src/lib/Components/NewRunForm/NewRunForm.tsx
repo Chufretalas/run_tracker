@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { GetAllRuns, SaveRun } from "../../../wailsjs/go/main/App"
-import convertDistance from "../utils/convert_distance"
-import DistUnit from "../types/distance_units"
-import { main } from "../../../wailsjs/go/models"
+import { SaveRun } from "../../../../wailsjs/go/main/App"
+import convertDistance from "../../utils/convert_distance"
+import DistUnit from "../../types/distance_units"
+import { main } from "../../../../wailsjs/go/models"
 
 import styles from "./NewRunForm.module.css"
 

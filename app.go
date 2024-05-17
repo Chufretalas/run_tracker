@@ -1,11 +1,13 @@
 package main
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"slices"
 )
 
 type Run struct {
@@ -54,6 +56,9 @@ func (a *App) GetAllRuns() []Run {
 	}
 
 	json.Unmarshal(data, &a.Runs)
+	slices.SortFunc(a.Runs, func(run1, run2 Run) int {
+		return cmp.Compare(run2.Day, run1.Day)
+	})
 	return a.Runs
 }
 

@@ -1,0 +1,64 @@
+.li {
+    width: 20rem;
+    border: 2px solid #f8d435;
+    border-radius: 6px;
+    background-color: rgb(12, 12, 12);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.678);
+    margin: auto;
+    padding: 7px;
+    font-size: 1.1rem;
+}
+
+.li b {
+    font-weight: bold;
+}
+
+.day {
+    font-size: 1.15rem;
+    text-decoration: underline;
+}
+
+.inner_wrapper {
+    margin-top: 6px;
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+}
+
+.data_div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.buttons_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.distance,
+.time,
+.velocity,
+.vo2,
+.bpm {
+    text-align: left;
+}
+
+.edit_button {
+    background-color: #f8d435;
+    border-radius: 99999999px;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    position: relative;
+    right: 0;
+    transition: all 250ms;
+}
+
+.edit_button:hover {
+    background-color: #c49c00;
+    color: white;
+    cursor: pointer;
+}
