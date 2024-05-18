@@ -6,7 +6,7 @@ import { main } from "../../../../wailsjs/go/models"
 
 import styles from "./NewRunForm.module.css"
 
-export default function NewRunForm({onSaveRun}: {onSaveRun: () => Promise<void>}) {
+export default function NewRunForm({ onSaveRun }: { onSaveRun: () => Promise<void> }) {
     const [day, setDay] = useState<string>("")
     const [distance, setDistance] = useState<number>(0)
     const [distanceUnit, setDistanceUnit] = useState<DistUnit>(DistUnit.Km)
@@ -41,15 +41,15 @@ export default function NewRunForm({onSaveRun}: {onSaveRun: () => Promise<void>}
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <fieldset>
-                <label htmlFor="day">Day of the run</label>
+                <label htmlFor="day">*Day of the run</label>
                 <input type="date" name="day" id="day"
-                    value={day} onChange={(v) => setDay(v.currentTarget.value)} />
+                    value={day} onChange={(v) => setDay(v.currentTarget.value)} required />
             </fieldset>
             <div>
                 <fieldset>
-                    <label htmlFor="distance">Distance ran</label>
+                    <label htmlFor="distance">*Distance ran</label>
                     <input type="number" id='distance' name='distance'
-                        value={distance == 0 ? "" : distance} onChange={(v) => setDistance(+v.currentTarget.value)} />
+                        value={distance == 0 ? "" : distance} onChange={(v) => setDistance(+v.currentTarget.value)} required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="distance_unit">Distance unit</label>
@@ -62,9 +62,9 @@ export default function NewRunForm({onSaveRun}: {onSaveRun: () => Promise<void>}
                 </fieldset>
             </div>
             <fieldset>
-                <label htmlFor="time">Time (minutes)</label>
+                <label htmlFor="time">*Time (minutes)</label>
                 <input type="number" id='time' name='time'
-                    value={time == 0 ? "" : time} onChange={(v) => setTime(+v.currentTarget.value)} />
+                    value={time == 0 ? "" : time} onChange={(v) => setTime(+v.currentTarget.value)} required />
             </fieldset>
             <fieldset>
                 <label htmlFor="time_vo2">Time in VO2 max (minutes)</label>
