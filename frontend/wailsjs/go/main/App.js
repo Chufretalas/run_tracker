@@ -14,6 +14,10 @@ export function PrintAllRuns() {
   return window['go']['main']['App']['PrintAllRuns']();
 }
 
-export function SaveRun(arg1) {
-  return window['go']['main']['App']['SaveRun'](arg1);
+export function SaveNewRun(arg1) {
+  return window['go']['main']['App']['SaveNewRun'](arg1);
+}
+
+export function UpdateRun(arg1) {
+  return window['go']['main']['App']['UpdateRun'](arg1);
 }

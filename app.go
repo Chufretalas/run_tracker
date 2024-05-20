@@ -11,6 +11,7 @@ import (
 )
 
 type Run struct {
+	Id       int     `json:"id"`
 	Day      string  `json:"day"`
 	Distance float32 `json:"distance"`
 	Time     float32 `json:"time"`
@@ -40,8 +41,13 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) SaveRun(r Run) {
-	a.Runs = append(a.Runs, r)
+func (a *App) SaveNewRun(newRun Run) {
+	for _, run := range a.GetAllRuns() {
+		if run.Id >= newRun.Id {
+			newRun.Id = run.Id + 1
+		}
+	}
+	a.Runs = append(a.Runs, newRun)
 	data, err := json.MarshalIndent(a.Runs, "", "\t")
 	if err != nil {
 		log.Fatal(err)
@@ -49,6 +55,21 @@ func (a *App) SaveRun(r Run) {
 	os.WriteFile("./data.json", data, 0644)
 }
 
+func (a *App) UpdateRun(updatedRun Run) {
+	a.GetAllRuns()
+	for idx, run := range a.Runs {
+		if run.Id == updatedRun.Id {
+			a.Runs[idx] = updatedRun
+		}
+	}
+	data, err := json.MarshalIndent(a.Runs, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	os.WriteFile("./data.json", data, 0644)
+}
+
+// Returns all runs and also updates a.Runs
 func (a *App) GetAllRuns() []Run {
 	data, err := os.ReadFile("./data.json")
 	if err != nil {

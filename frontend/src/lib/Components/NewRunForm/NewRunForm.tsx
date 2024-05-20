@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { SaveRun } from "../../../../wailsjs/go/main/App"
+import { SaveNewRun } from "../../../../wailsjs/go/main/App"
 import convertDistance from "../../utils/convert_distance"
 import DistUnit from "../../types/distance_units"
 import { main } from "../../../../wailsjs/go/models"
@@ -33,7 +33,7 @@ export default function NewRunForm({ onSaveRun }: { onSaveRun: () => Promise<voi
         run.time_vo2 = timeVO2
         run.avg_bpm = avgBPM
 
-        await SaveRun(run)
+        await SaveNewRun(run)
         await onSaveRun()
         resetForm()
     }

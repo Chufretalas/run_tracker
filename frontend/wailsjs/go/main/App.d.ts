@@ -8,4 +8,6 @@ export function Greet(arg1:string):Promise<string>;
 
 export function PrintAllRuns():Promise<void>;
 
-export function SaveRun(arg1:main.Run):Promise<void>;
+export function SaveNewRun(arg1:main.Run):Promise<void>;
+
+export function UpdateRun(arg1:main.Run):Promise<void>;

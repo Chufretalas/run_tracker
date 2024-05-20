@@ -24,6 +24,7 @@ export default function DefaultDialog({ children, isOpen, onClose, title = "" }
                     className={styles.close_button}>X</button>
                 <span>{title}</span>
             </div>
+            <hr className={styles.hr}/>
             {children}
         </dialog>
     )

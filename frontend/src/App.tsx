@@ -10,10 +10,12 @@ import RunCard from './lib/Components/RunCard/RunCard';
 import EditRunDialog from './lib/Components/EditRunDialog/EditRunDialog';
 
 //TODO: oldest/newest run toggle, I can do it with just css
+//TODO: pagination and a separator for cards from different months
 
 export default function App() {
 
-    const [editDialogIsOpen, setEditDialogIsOpen] = useState(true)
+    const [editDialogIsOpen, setEditDialogIsOpen] = useState(false)
+    const [activeEditRun, setActiveEditRun] = useState<main.Run>(new main.Run)
 
     const [prevDistanceUnit, setPrevDistanceUnit] = useState<DistUnit>(DistUnit.Km)
     const [prevVelocityUnit, setPrevVelocityUnit] = useState<VelUnit>(VelUnit.KmH)
@@ -58,7 +60,11 @@ export default function App() {
                     </div>
                     <ul className={styles.run_list}>
                         {allRuns.map((run, idx) => (
-                            <RunCard key={idx} run={run} distUnit={prevDistanceUnit} velUnit={prevVelocityUnit} />
+                            <RunCard key={idx} run={run} distUnit={prevDistanceUnit} velUnit={prevVelocityUnit}
+                                openEdit={(run) => {
+                                    setActiveEditRun(new main.Run(run))
+                                    setEditDialogIsOpen(true)
+                                }} />
                         ))}
                     </ul>
                 </section>
@@ -66,7 +72,7 @@ export default function App() {
                     Right stuff
                 </section>
             </main>
-            <EditRunDialog run={new main.Run()} isOpen={editDialogIsOpen} onClose={() => { setEditDialogIsOpen(false) }}
+            <EditRunDialog run={activeEditRun} isOpen={editDialogIsOpen} onClose={() => { setEditDialogIsOpen(false) }}
                 onSaveRun={async () => {
                     const newAllRuns = await GetAllRuns()
                     setAllRuns(newAllRuns)

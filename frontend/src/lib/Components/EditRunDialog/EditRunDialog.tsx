@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { main } from "../../../../wailsjs/go/models";
 import DefaultDialog from "../DefaultDialog/DefaultDialog";
 import DistUnit from "../../types/distance_units";
 import convertDistance from "../../utils/convert_distance";
-import { SaveRun } from "../../../../wailsjs/go/main/App";
+import { UpdateRun } from "../../../../wailsjs/go/main/App";
 
 import styles from "./EditRunDialog.module.css"
 
 export default function EditRunDialog({ run, isOpen, onClose, onSaveRun }
-    : { run: main.Run, isOpen: boolean, onClose: () => void, onSaveRun: () => void }) {
+    : { run: main.Run, isOpen: boolean, onClose: () => void, onSaveRun: () => Promise<void> }) {
     const [day, setDay] = useState<string>("")
     const [distance, setDistance] = useState<number>(0)
     const [distanceUnit, setDistanceUnit] = useState<DistUnit>(DistUnit.Km)
     const [time, setTime] = useState<number>(0)
     const [timeVO2, setTimeVO2] = useState<number>(0)
     const [avgBPM, setAvgBPM] = useState<number>(0)
+
+    useEffect(() => {
+        setDay(run.day)
+        setDistance(run.distance)
+        setTime(run.time)
+        setTimeVO2(run.time_vo2)
+        setAvgBPM(run.avg_bpm)
+    }, [run])
 
     function resetForm() {
         setDay("")
@@ -28,21 +36,22 @@ export default function EditRunDialog({ run, isOpen, onClose, onSaveRun }
     async function handleSubmit(e: any) {
         e.preventDefault()
         e.target.reset()
-        // const run = new main.Run()
-        // run.day = day
-        // run.distance = convertDistance(distance, distanceUnit, DistUnit.Km)
-        // run.time = time
-        // run.time_vo2 = timeVO2
-        // run.avg_bpm = avgBPM
+        const updatedRun = new main.Run()
+        updatedRun.id = run.id
+        updatedRun.day = day
+        updatedRun.distance = convertDistance(distance, distanceUnit, DistUnit.Km)
+        updatedRun.time = time
+        updatedRun.time_vo2 = timeVO2
+        updatedRun.avg_bpm = avgBPM
 
-        // await SaveRun(run)
-        // await onSaveRun()
+        await UpdateRun(updatedRun)
+        await onSaveRun()
         resetForm()
         onClose()
     }
-    
+
     return (
-        <DefaultDialog title="Edit run" isOpen={isOpen} onClose={onClose}>
+        <DefaultDialog title={`Edit run (id: ${run.id})`} isOpen={isOpen} onClose={onClose}>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <fieldset>
                     <label htmlFor="edit_day">*Day of the run</label>

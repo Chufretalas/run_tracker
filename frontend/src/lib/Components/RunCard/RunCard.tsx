@@ -6,10 +6,15 @@ import convertDistance from "../../utils/convert_distance";
 
 import styles from "./RunCard.module.css"
 
-export default function RunCard({ run, distUnit, velUnit }: { run: main.Run, distUnit: DistUnit, velUnit: VelUnit }) {
+export default function RunCard({ run, distUnit, velUnit, openEdit }
+    : { run: main.Run, distUnit: DistUnit, velUnit: VelUnit, openEdit: (run: main.Run) => void }) {
     return (
         <li className={styles.li}>
-            <span className={styles.day}><b>Day:</b> {run.day}</span>
+            <div className={styles.card_header}>
+                <span />
+                <span className={styles.day}><b>Day:</b> {run.day}</span>
+                <span className={styles.id_span}>id: {run.id}</span>
+            </div>
             <div className={styles.inner_wrapper}>
                 <div className={styles.data_div}>
                     <span className={styles.distance}><b>Distance:</b> {convertDistance(run.distance, DistUnit.Km, distUnit).toFixed(2)} {distUnit}</span>
@@ -19,7 +24,7 @@ export default function RunCard({ run, distUnit, velUnit }: { run: main.Run, dis
                     <span className={styles.bpm}><b>Avg. BPM:</b> {run.avg_bpm} bpm</span>
                 </div>
                 <div className={styles.buttons_div}>
-                    <button className={styles.edit_button} title="Edit run">🖊</button>
+                    <button onClick={() => openEdit(run)} className={styles.edit_button} title="Edit run">🖊</button>
                 </div>
             </div>
         </li>

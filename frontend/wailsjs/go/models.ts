@@ -1,6 +1,7 @@
 export namespace main {
 	
 	export class Run {
+	    id: number;
 	    day: string;
 	    distance: number;
 	    time: number;
@@ -13,6 +14,7 @@ export namespace main {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
 	        this.day = source["day"];
 	        this.distance = source["distance"];
 	        this.time = source["time"];

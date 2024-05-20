@@ -13,9 +13,19 @@
     font-weight: bold;
 }
 
+.card_header {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+}
+
 .day {
     font-size: 1.15rem;
     text-decoration: underline;
+}
+
+.id_span {
+    font-size: small;
+    color: rgb(214, 214, 214);
 }
 
 .inner_wrapper {
@@ -62,3 +72,4 @@
     color: white;
     cursor: pointer;
 }
+
