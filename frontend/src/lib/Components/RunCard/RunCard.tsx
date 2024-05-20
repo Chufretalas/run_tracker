@@ -6,8 +6,8 @@ import convertDistance from "../../utils/convert_distance";
 
 import styles from "./RunCard.module.css"
 
-export default function RunCard({ run, distUnit, velUnit, openEdit }
-    : { run: main.Run, distUnit: DistUnit, velUnit: VelUnit, openEdit: (run: main.Run) => void }) {
+export default function RunCard({ run, distUnit, velUnit, openEdit, deleteRun }
+    : { run: main.Run, distUnit: DistUnit, velUnit: VelUnit, openEdit: (run: main.Run) => void, deleteRun: (runId: number) => void }) {
     return (
         <li className={styles.li}>
             <div className={styles.card_header}>
@@ -24,6 +24,7 @@ export default function RunCard({ run, distUnit, velUnit, openEdit }
                     <span className={styles.bpm}><b>Avg. BPM:</b> {run.avg_bpm} bpm</span>
                 </div>
                 <div className={styles.buttons_div}>
+                    <button onClick={() => deleteRun(run.id)} className={styles.delete_button} title="Delete run">🗑</button>
                     <button onClick={() => openEdit(run)} className={styles.edit_button} title="Edit run">🖊</button>
                 </div>
             </div>

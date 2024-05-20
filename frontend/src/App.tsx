@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './App.module.css';
 
-import { GetAllRuns } from "../wailsjs/go/main/App"
+import { DeleteRun, GetAllRuns } from "../wailsjs/go/main/App"
 import { main } from "../wailsjs/go/models"
 import DistUnit from './lib/types/distance_units';
 import VelUnit from './lib/types/velocity_units';
@@ -11,11 +11,15 @@ import EditRunDialog from './lib/Components/EditRunDialog/EditRunDialog';
 
 //TODO: oldest/newest run toggle, I can do it with just css
 //TODO: pagination and a separator for cards from different months
+//TODO: give some time to undo a deletion
 
 export default function App() {
 
     const [editDialogIsOpen, setEditDialogIsOpen] = useState(false)
     const [activeEditRun, setActiveEditRun] = useState<main.Run>(new main.Run)
+
+    //TODO: implement this with a simple dialog
+    const [shouldAskToDelete, setShouldAskToDelete] = useState(true)
 
     const [prevDistanceUnit, setPrevDistanceUnit] = useState<DistUnit>(DistUnit.Km)
     const [prevVelocityUnit, setPrevVelocityUnit] = useState<VelUnit>(VelUnit.KmH)
@@ -64,7 +68,13 @@ export default function App() {
                                 openEdit={(run) => {
                                     setActiveEditRun(new main.Run(run))
                                     setEditDialogIsOpen(true)
-                                }} />
+                                }}
+                                deleteRun={async (runId) => {
+                                    await DeleteRun(runId)
+                                    const newAllRuns = await GetAllRuns()
+                                    setAllRuns(newAllRuns)
+                                }}
+                            />
                         ))}
                     </ul>
                 </section>

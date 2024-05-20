@@ -83,6 +83,19 @@ func (a *App) GetAllRuns() []Run {
 	return a.Runs
 }
 
+func (a *App) DeleteRun(runId int) {
+	a.GetAllRuns()
+	a.Runs = slices.DeleteFunc(a.Runs, func(run Run) bool {
+		return run.Id == runId
+	})
+	//TODO: I could abstract all of this saving part
+	data, err := json.MarshalIndent(a.Runs, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	os.WriteFile("./data.json", data, 0644)
+}
+
 func (a *App) PrintAllRuns() {
 	fmt.Println(a.GetAllRuns())
 }

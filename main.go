@@ -36,7 +36,7 @@ func main() {
 
 	// Create application with options
 	err = wails.Run(&options.App{
-		Title:  "run_tracker",
+		Title:  "Run Tracker 👟",
 		Width:  1024,
 		Height: 768,
 		AssetServer: &assetserver.Options{

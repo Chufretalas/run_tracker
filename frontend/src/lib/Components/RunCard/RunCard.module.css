@@ -44,6 +44,7 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
+    row-gap: 5px;
 }
 
 .distance,
@@ -69,6 +70,25 @@
 
 .edit_button:hover {
     background-color: #c49c00;
+    color: white;
+    cursor: pointer;
+}
+
+.delete_button {
+    background-color: #ef4848;
+    border-radius: 99999999px;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    position: relative;
+    right: 0;
+    transition: all 250ms;
+}
+
+.delete_button:hover {
+    background-color: #d53f3f;
     color: white;
     cursor: pointer;
 }
