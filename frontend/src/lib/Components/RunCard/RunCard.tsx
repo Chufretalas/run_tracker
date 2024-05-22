@@ -1,13 +1,13 @@
 import { main } from "../../../../wailsjs/go/models";
 import DistUnit from "../../types/distance_units";
-import VelUnit from "../../types/velocity_units";
-import calcVelocity from "../../utils/calcVelocity";
+import SpeedUnit from "../../types/speed_units";
+import calcSpeed from "../../utils/calcSpeed";
 import convertDistance from "../../utils/convert_distance";
 
 import styles from "./RunCard.module.css"
 
-export default function RunCard({ run, distUnit, velUnit, openEdit, deleteRun }
-    : { run: main.Run, distUnit: DistUnit, velUnit: VelUnit, openEdit: (run: main.Run) => void, deleteRun: (runId: number) => void }) {
+export default function RunCard({ run, distUnit, speedUnit, openEdit, deleteRun }
+    : { run: main.Run, distUnit: DistUnit, speedUnit: SpeedUnit, openEdit: (run: main.Run) => void, deleteRun: (runId: number) => void }) {
     return (
         <li className={styles.li}>
             <div className={styles.card_header}>
@@ -19,7 +19,7 @@ export default function RunCard({ run, distUnit, velUnit, openEdit, deleteRun }
                 <div className={styles.data_div}>
                     <span className={styles.distance}><b>Distance:</b> {convertDistance(run.distance, DistUnit.Km, distUnit).toFixed(2)} {distUnit}</span>
                     <span className={styles.time}><b>Time:</b> {run.time} minutes</span>
-                    <span className={styles.velocity}><b>Avg. Velocity:</b> {calcVelocity(run.distance, DistUnit.Km, run.time, velUnit).toFixed(2)} {velUnit}</span>
+                    <span className={styles.speed}><b>Avg. Speed:</b> {calcSpeed(run.distance, DistUnit.Km, run.time, speedUnit).toFixed(2)} {speedUnit}</span>
                     <span className={styles.vo2}><b>Time in VO2 máx:</b> {run.time_vo2} minutes</span>
                     <span className={styles.bpm}><b>Avg. BPM:</b> {run.avg_bpm} bpm</span>
                 </div>

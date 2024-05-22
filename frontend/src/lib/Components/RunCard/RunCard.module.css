@@ -49,7 +49,7 @@
 
 .distance,
 .time,
-.velocity,
+.speed,
 .vo2,
 .bpm {
     text-align: left;
@@ -88,7 +88,7 @@
 }
 
 .delete_button:hover {
-    background-color: #d53f3f;
+    background-color: #c53a3a;
     color: white;
     cursor: pointer;
 }

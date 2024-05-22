@@ -1,7 +1,7 @@
-enum VelUnit {
+enum SpeedUnit {
     KmH = "Km/h",
     milesH = "miles/h",
     mS = "m/s"
 }
 
-export default VelUnit
+export default SpeedUnit

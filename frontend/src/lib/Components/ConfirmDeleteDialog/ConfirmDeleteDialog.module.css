@@ -1,0 +1,49 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldset {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.fieldset label {
+    font-size: 1.2rem;
+}
+
+.fieldset input {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.fieldset input:hover {
+    cursor: pointer;
+}
+
+.confirm_button {
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    width: min-content;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ef4848;
+    color: white;
+    margin-bottom: 0.8rem;
+    font-weight: bolder;
+    font-size: larger;
+    cursor: pointer;
+    transition: all 200ms;
+    margin: auto 0;
+}
+
+.confirm_button:hover {
+    background-color: rgb(154, 31, 31);
+    color: white;
+}
