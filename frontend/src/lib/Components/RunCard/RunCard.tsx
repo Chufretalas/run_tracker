@@ -9,7 +9,7 @@ import styles from "./RunCard.module.css"
 export default function RunCard({ run, distUnit, speedUnit, openEdit, deleteRun }
     : { run: main.Run, distUnit: DistUnit, speedUnit: SpeedUnit, openEdit: (run: main.Run) => void, deleteRun: (runId: number) => void }) {
     return (
-        <li className={styles.li}>
+        <div className={styles.div}>
             <div className={styles.card_header}>
                 <span />
                 <span className={styles.day}><b>Day:</b> {run.day}</span>
@@ -28,6 +28,6 @@ export default function RunCard({ run, distUnit, speedUnit, openEdit, deleteRun 
                     <button onClick={() => openEdit(run)} className={styles.edit_button} title="Edit run">🖊</button>
                 </div>
             </div>
-        </li>
+        </div>
     )
 }

@@ -1,4 +1,4 @@
-.li {
+.div {
     width: 20rem;
     border: 2px solid #f8d435;
     border-radius: 6px;
@@ -9,7 +9,7 @@
     font-size: 1.1rem;
 }
 
-.li b {
+.div b {
     font-weight: bold;
 }
 

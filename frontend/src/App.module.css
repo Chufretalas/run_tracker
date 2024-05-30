@@ -54,3 +54,14 @@
     margin: auto;
     padding: 0 30px;
 }
+
+.runs_li {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.runs_li > span {
+    margin-top: 10px;
+    font-size: large;
+}

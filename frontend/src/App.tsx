@@ -14,7 +14,7 @@ import StatsSection from './lib/Components/StatsSection/StatsSection';
 import ConfirmDeleteDialog from './lib/Components/ConfirmDeleteDialog/ConfirmDeleteDialog';
 
 //TODO: oldest/newest run toggle, I can do it with just css
-//TODO: pagination and a separator for cards from different months
+//TODO: month period filtering
 
 export default function App() {
 
@@ -72,24 +72,37 @@ export default function App() {
                         </div>
                     </div>
                     <ul className={styles.run_list}>
-                        {allRuns.map((run, idx) => (
-                            <RunCard key={idx} run={run} distUnit={prevDistanceUnit} speedUnit={prevSpeedUnit}
-                                openEdit={(run) => {
-                                    setActiveRun(new main.Run(run))
-                                    setEditDialogIsOpen(true)
-                                }}
-                                deleteRun={async (runId) => {
-                                    setActiveRun(new main.Run(run))
-                                    if (shouldAskToDelete) {
-                                        setAskDeleteDialogIsOpen(true)
-                                        return
-                                    }
-                                    await DeleteRun(runId)
-                                    const newAllRuns = await GetAllRuns()
-                                    setAllRuns(newAllRuns)
-                                }}
-                            />
-                        ))}
+                        {allRuns.map(function (run, idx) {
+                            const titleCandidate = run.day.slice(0, 7)
+                            let shouldWriteGroupTitle = false
+                            if (this.groupTitle === "" || this.groupTitle !== titleCandidate) {
+                                this.groupTitle = titleCandidate
+                                shouldWriteGroupTitle = true
+                            }
+                            return (
+                                <li key={idx} className={styles.runs_li}>
+                                    {shouldWriteGroupTitle
+                                        ? <span>↓ {this.groupTitle} ↓</span>
+                                        : <></>}
+                                    <RunCard run={run} distUnit={prevDistanceUnit} speedUnit={prevSpeedUnit}
+                                        openEdit={(run) => {
+                                            setActiveRun(new main.Run(run))
+                                            setEditDialogIsOpen(true)
+                                        }}
+                                        deleteRun={async (runId) => {
+                                            setActiveRun(new main.Run(run))
+                                            if (shouldAskToDelete) {
+                                                setAskDeleteDialogIsOpen(true)
+                                                return
+                                            }
+                                            await DeleteRun(runId)
+                                            const newAllRuns = await GetAllRuns()
+                                            setAllRuns(newAllRuns)
+                                        }}
+                                    />
+                                </li>
+                            )
+                        }, { groupTitle: "" })}
                     </ul>
                 </section>
                 <section>
