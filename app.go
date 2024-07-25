@@ -19,6 +19,14 @@ type Run struct {
 	AvgBPM   float32 `json:"avg_bpm"`
 }
 
+func saveRunsToFile(runs any) {
+	data, err := json.MarshalIndent(runs, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
+	os.WriteFile("./data.json", data, 0644)
+}
+
 // App struct
 type App struct {
 	ctx  context.Context
@@ -48,11 +56,7 @@ func (a *App) SaveNewRun(newRun Run) {
 		}
 	}
 	a.Runs = append(a.Runs, newRun)
-	data, err := json.MarshalIndent(a.Runs, "", "\t")
-	if err != nil {
-		log.Fatal(err)
-	}
-	os.WriteFile("./data.json", data, 0644)
+	saveRunsToFile(a.Runs)
 }
 
 func (a *App) UpdateRun(updatedRun Run) {
@@ -62,11 +66,7 @@ func (a *App) UpdateRun(updatedRun Run) {
 			a.Runs[idx] = updatedRun
 		}
 	}
-	data, err := json.MarshalIndent(a.Runs, "", "\t")
-	if err != nil {
-		log.Fatal(err)
-	}
-	os.WriteFile("./data.json", data, 0644)
+	saveRunsToFile(a.Runs)
 }
 
 // Returns all runs and also updates a.Runs
@@ -88,12 +88,7 @@ func (a *App) DeleteRun(runId int) {
 	a.Runs = slices.DeleteFunc(a.Runs, func(run Run) bool {
 		return run.Id == runId
 	})
-	//TODO: I could abstract all of this saving part
-	data, err := json.MarshalIndent(a.Runs, "", "\t")
-	if err != nil {
-		log.Fatal(err)
-	}
-	os.WriteFile("./data.json", data, 0644)
+	saveRunsToFile(a.Runs)
 }
 
 func (a *App) PrintAllRuns() {
