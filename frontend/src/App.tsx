@@ -15,6 +15,7 @@ import ConfirmDeleteDialog from './lib/Components/ConfirmDeleteDialog/ConfirmDel
 
 //TODO: oldest/newest run toggle, I can do it with just css
 //TODO: month period filtering
+//TODO: make the unit selection work both for the previous runs and stats section
 
 export default function App() {
 
